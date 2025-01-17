@@ -21,6 +21,16 @@ export default {
         description: 'Type of the car (e.g., Sport, Sedan, SUV, etc.)',
       },
       {
+        name: 'slug',
+        type: 'slug',
+        title: 'Slug',
+        description: 'URL-friendly version of the product name',
+        options: {
+            source: 'name',
+            maxLength: 96,
+        },
+    },
+      {
         name: 'fuelCapacity',
         type: 'string',
         title: 'Fuel Capacity',
