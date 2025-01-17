@@ -1,5 +1,3 @@
-"use client";
-import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -15,22 +13,25 @@ import { client } from "../lib/sanity";
 import { urlFor } from "../lib/sanity";
 
 interface simplifiedCar {
-  id: string;
+  _id: string;
   name: string;
   type: string;
+  slug:{
+    current:string
+  };
   image: string;
   fuelCapacity: string;
   transmission: string;
   seatingCapacity: string;
   pricePerDay: string;
-  slug: string;
 }
 
 async function getData() {
   const query = `*[_type == "car"]{
-  id,
+  _id,
   name,
     type,
+    slug,
     image{
     asset->{url}
   },
@@ -38,7 +39,6 @@ async function getData() {
     transmission,
     seatingCapacity,
     pricePerDay,
-    "slug": slug.current
     
 }`;
   const data = await client.fetch(query);
@@ -80,7 +80,7 @@ export default async function Page() {
         <section className="popular w-full flex flex-col gap-4">
           <div className="sec grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
             {data.map((product) => (
-              <div key={product.id}>
+              <div key={product._id}>
                 <Card className="w-full max-w-[304px] mx-auto h-[388px] flex flex-col justify-between">
                   <CardHeader>
                     <CardTitle className="w-full flex items-center justify-between">
@@ -131,7 +131,7 @@ export default async function Page() {
                       {product.pricePerDay}/
                       <span className="text-gray-500">day</span>
                     </p>
-                    <Link href={`categories/${product.slug}`}>
+                    <Link href={`/categories/${product.slug.current}`}>
                       <button className="bg-[#3563e9] p-2 text-white rounded-md">
                         Rent Now
                       </button>

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 
 export default function page() {
+  
   return (
     <div className='w-full flex'>
      <div className="first hidden sm:flex w-[25%]">

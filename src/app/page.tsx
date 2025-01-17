@@ -149,7 +149,7 @@ export default async function Home() {
                     {product.pricePerDay}/
                     <span className="text-gray-500">day</span>
                   </p>
-                  <Link href={`categories/${product.slug}`}>
+                  <Link href={`/categories/${product.slug}`}>
                     <button className="bg-[#3563e9] p-2 text-white rounded-md">
                       Rent Now
                     </button>
@@ -216,7 +216,7 @@ export default async function Home() {
                     {product.pricePerDay}/
                     <span className="text-gray-500">day</span>
                   </p>
-                  <Link href={`categories/${product.slug}`}>
+                  <Link href={`/categories/${product.slug}`}>
                     <button className="bg-[#3563e9] p-2 text-white rounded-md">
                       Rent Now
                     </button>
