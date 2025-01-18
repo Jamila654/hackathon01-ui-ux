@@ -55,6 +55,9 @@ interface Car {
   brand: string;
   originalPrice: string;
   tags: string[];
+  slug: {
+    current: string;
+  };
 }
 
 async function getCarBySlug(slug: string) {
@@ -72,7 +75,8 @@ async function getCarBySlug(slug: string) {
     pricePerDay,
     brand,
   originalPrice,
-  tags
+  tags,
+  slug
 
 
   }`;
@@ -130,7 +134,12 @@ export default async function CarDetails({
                   <Image src={"/heart.png"} alt="" width={20} height={20} />
                 </CardTitle>
                 <CardDescription>{car.type}</CardDescription>
-                <Image src={"/Reviewsstar.png"} alt="" width={220} height={24} />
+                <Image
+                  src={"/Reviewsstar.png"}
+                  alt=""
+                  width={220}
+                  height={24}
+                />
               </CardHeader>
               <CardContent className="flex flex-col gap-6 mt-8">
                 <div className="car-details w-full flex flex-col gap-6">
@@ -204,7 +213,7 @@ export default async function CarDetails({
                   {car.originalPrice}
                 </h1>
               </div>
-              <Link href={"/payment"}>
+              <Link href={`/payment/${car.slug.current}`}>
                 <button className="bg-[#3563e9] hover:bg-[#264ac6] transition-all p-3 sm:p-4 px-6 sm:px-10 text-nowrap  text-white rounded-md w-full max-w-[180px] text-center">
                   Rent Now
                 </button>
