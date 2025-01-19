@@ -1,89 +1,134 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface FilterProps {
-  onFilter: (filters: { types: string[]; capacities: string[]; maxPrice: number }) => void;
+  onFilterChange: (filters: any) => void;
 }
 
-export default function FilterComponent({ onFilter }: FilterProps) {
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [selectedCapacities, setSelectedCapacities] = useState<string[]>([]);
-  const [maxPrice, setMaxPrice] = useState(100);
+const FilterComponent: React.FC<FilterProps> = ({ onFilterChange }) => {
+  const [filters, setFilters] = useState({
+    type: [],
+    seatingCapacity: [],
+    fuelCapacity: [],
+  });
 
-  const carTypes = ["Sport", "SUV", "MPV", "Sedan", "Coupe", "Hatchback"];
-  const seatingCapacities = ["2 Person", "4 Person", "6 Person", "8 or More"];
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, checked } = e.target;
+    const updatedFilters: any = { ...filters };
 
-  const handleTypeChange = (type: string) => {
-    setSelectedTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
-    );
-  };
+    if (checked) {
+      updatedFilters[name] = [...updatedFilters[name], value];
+    } else {
+      updatedFilters[name] = updatedFilters[name].filter((item: string) => item !== value);
+    }
 
-  const handleCapacityChange = (capacity: string) => {
-    setSelectedCapacities((prev) =>
-      prev.includes(capacity) ? prev.filter((c) => c !== capacity) : [...prev, capacity]
-    );
-  };
-
-  const applyFilters = () => {
-    onFilter({
-      types: selectedTypes,
-      capacities: selectedCapacities,
-      maxPrice,
-    });
+    setFilters(updatedFilters);
+    onFilterChange(updatedFilters);
   };
 
   return (
-    <div className="w-full max-w-[300px] p-4 bg-white shadow-md rounded-md">
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold mb-2">Type</h3>
-        {carTypes.map((type) => (
-          <div key={type} className="flex items-center gap-2 mb-2">
+    <div className="filter-component flex flex-col gap-10 p-10">
+      <h3 className="text-4xl text-[#3563e9] font-bold">Filter by</h3>
+
+      <div className="flex flex-col gap-5">
+        <h4 className="text-2xl text-gray-500">Type</h4>
+        <div className="flex flex-col gap-4">
+          <label>
             <input
               type="checkbox"
-              id={`type-${type}`}
-              checked={selectedTypes.includes(type)}
-              onChange={() => handleTypeChange(type)}
-            />
-            <label htmlFor={`type-${type}`} className="text-sm">
-              {type}
-            </label>
-          </div>
-        ))}
-      </div>
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold mb-2">Capacity</h3>
-        {seatingCapacities.map((capacity) => (
-          <div key={capacity} className="flex items-center gap-2 mb-2">
+              name="type"
+              value="SUV"
+              onChange={handleFilterChange}
+            />{" "}
+            SUV
+          </label>
+          <label>
             <input
               type="checkbox"
-              id={`capacity-${capacity}`}
-              checked={selectedCapacities.includes(capacity)}
-              onChange={() => handleCapacityChange(capacity)}
-            />
-            <label htmlFor={`capacity-${capacity}`} className="text-sm">
-              {capacity}
-            </label>
-          </div>
-        ))}
+              name="type"
+              value="Sedan"
+              onChange={handleFilterChange}
+            />{" "}
+            Sedan
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="type"
+              value="Sport"
+              onChange={handleFilterChange}
+            />{" "}
+            Sport
+          </label>
+        </div>
       </div>
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold mb-2">Price</h3>
-        <input title="hh"
-          type="range"
-          min="0"
-          max="100"
-          value={maxPrice}
-          onChange={(e) => setMaxPrice(Number(e.target.value))}
-          className="w-full"
-        />
-        <p className="text-sm mt-2">Max. ${maxPrice}.00</p>
+
+      <div className="flex flex-col gap-5">
+        <h4 className="text-2xl text-gray-500">Capacity</h4>
+        <div className="flex flex-col gap-4">
+          <label>
+            <input
+              type="checkbox"
+              name="seatingCapacity"
+              value="2 People"
+              onChange={handleFilterChange}
+            />{" "}
+            2 People
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="seatingCapacity"
+              value="4 People"
+              onChange={handleFilterChange}
+            />{" "}
+            4 People
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="seatingCapacity"
+              value="5 People"
+              onChange={handleFilterChange}
+            />{" "}
+            5 People
+          </label>
+        </div>
+        <div className="flex flex-col gap-5">
+  <h4 className="text-2xl text-gray-500">Fuel Capacity</h4>
+  <div className="flex flex-col gap-4">
+    <label>
+      <input
+        type="checkbox"
+        name="fuelCapacity"
+        value="50L"
+        onChange={handleFilterChange}
+      />{" "}
+      50L
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        name="fuelCapacity"
+        value="70L"
+        onChange={handleFilterChange}
+      />{" "}
+      70L
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        name="fuelCapacity"
+        value="60L"
+        onChange={handleFilterChange}
+      />{" "}
+      90L
+    </label>
+  </div>
+  </div>
       </div>
-      <button
-        onClick={applyFilters}
-        className="bg-blue-500 text-white py-2 px-4 rounded-md w-full"
-      >
-        Apply Filters
-      </button>
     </div>
   );
-}
+};
+
+export default FilterComponent;
+

@@ -1,3 +1,4 @@
+'use client'
 import { client, urlFor } from "@/app/lib/sanity";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useState, useEffect } from "react";
 
 interface simplifiedCar {
   _id: string;
@@ -99,10 +101,10 @@ export default async function CarDetails({
 
   return (
     <div className="w-full flex">
-      <div className="first hidden sm:flex w-[25%]">
+      {/* <div className="first hidden sm:flex w-[25%]">
         <Image src={"/Nav Bar Side.png"} alt="" width={360} height={1600} />
-      </div>
-      <div className="sec w-full sm:w-[75%] bg-[#f6f7f9] p-4 sm:p-6  flex flex-col gap-10 font-[family-name:var(--font-geist-sans)]">
+      </div> */}
+      <div className="sec w-full bg-[#f6f7f9] p-4 sm:p-6  flex flex-col gap-10 font-[family-name:var(--font-geist-sans)]">
         <section className=" w-full flex flex-col md:flex-row gap-5  items-center justify-around">
           <div className="first flex flex-col gap-4 w-full  lg:max-w-[470px]  lg:max-h-[508px]">
             <div>

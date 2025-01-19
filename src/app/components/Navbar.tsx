@@ -1,17 +1,16 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { client } from '../lib/sanity';
-import Search from './Search';
-
-
+"use client";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { client } from "../lib/sanity";
+import Search from "./Search";
+import Link from "next/link";
 
 interface simplifiedCar {
   _id: string;
   name: string;
   type: string;
-  slug:{
-    current:string
+  slug: {
+    current: string;
   };
   image: string;
   fuelCapacity: string;
@@ -49,29 +48,21 @@ export default function Navbar() {
       setData(fetchedData);
     };
 
-    fetchData(); 
+    fetchData();
   }, []);
 
-  
   return (
-    <div className='w-full bg-white h-auto flex flex-col md:flex-row items-center justify-between p-4 md:p-8 border-b-2 border-b-[#e7eef6]'>
+    <div className="w-full bg-white h-auto flex flex-col md:flex-row items-center justify-between p-4 md:p-8 border-b-2 border-b-[#e7eef6]">
       <div className="first flex flex-col md:flex-row items-center gap-4 md:gap-16">
-        <h1 className='text-[#3563e9] text-4xl font-bold'>MORENT</h1>
+        <h1 className="text-[#3563e9] text-4xl font-bold">MORENT</h1>
         <div className="input relative w-full md:w-auto">
-          {/* <Image src={'/search-normal.png'} alt='' width={24} height={24} className='absolute top-1/2 left-3 transform -translate-y-1/2'/> */}
-          {/* <input 
-            type="text" 
-            title="search" 
-            placeholder="Say something here" 
-            className='border-2 border-[#e7eef6] w-full md:w-[492px] h-[44px] rounded-full p-2 pl-10 pr-12'
-          /> */}
-          
-            <Search data={data} />
-          {/* <Image src={'/filter.png'} alt='' width={24} height={24} className='absolute top-1/2 right-3 transform -translate-y-1/2'/> */}
+          <Search data={data} />
         </div>
       </div>
       <div className="icons mt-4 md:mt-0">
-        <Image src={'/Profil & Notification.png'} alt='' width={236} height={44} />
+        <Link href={"/admin"}>
+          <Image src={"/admin.png"} alt="" width={48} height={44} />
+        </Link>
       </div>
     </div>
   );
