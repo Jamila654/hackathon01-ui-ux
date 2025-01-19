@@ -11,6 +11,7 @@ import {
 
 import { client } from "../lib/sanity";
 import { urlFor } from "../lib/sanity";
+import FilterComponent from "../components/FilterComponent";
 
 interface simplifiedCar {
   _id: string;
@@ -44,10 +45,8 @@ async function getData() {
   const data = await client.fetch(query);
   return data;
 }
-
 export default async function Page() {
   const data: simplifiedCar[] = await getData();
-
   return (
     <div className="w-full flex">
       <div className="first hidden sm:flex w-[20%]">
