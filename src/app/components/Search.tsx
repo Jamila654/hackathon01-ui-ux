@@ -31,13 +31,14 @@ export default function Search({ data }: SearchProps) {
     setSearchQuery(query);
 
     if (query.trim()) {
-      const filtered = data.filter((car) =>
-        car.name.toLowerCase().includes(query.toLowerCase())
-      );
+      const filtered = data.filter((car) => {
+        console.log(car.name.toLowerCase());
+        return car.name.toLowerCase().includes(query.toLowerCase());
+      });
       setFilteredCars(filtered);
     } else {
       setFilteredCars([]);
-      setSearchQuery('')
+      setSearchQuery('');
     }
   };
 
@@ -137,7 +138,3 @@ export default function Search({ data }: SearchProps) {
     </div>
   );
 }
-
-
-
-
