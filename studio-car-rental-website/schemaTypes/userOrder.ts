@@ -14,6 +14,11 @@ export default {
         title: 'User Email',
       },
       {
+        name: 'phoneNumber',
+        type: 'string',
+        title: 'Phone Number',
+      },
+      {
         name: 'orders',
         type: 'array',
         title: 'Orders',
