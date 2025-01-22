@@ -39,7 +39,6 @@ async function getData() {
 }
 
 export default function Navbar() {
-  // const data = await getData();
   const [data, setData] = useState<simplifiedCar[]>([]);
 
   useEffect(() => {

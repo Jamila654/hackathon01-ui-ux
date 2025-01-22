@@ -4,7 +4,6 @@ export default function Footer() {
   return (
     <div className="relative flex flex-col items-center justify-center gap-6 px-5 w-full bg-white py-6">
       <div className="first w-full flex flex-wrap items-start justify-between gap-6">
-        {/* Intro Section */}
         <div className="intro flex flex-col gap-2 w-full lg:w-auto">
           <h1 className="text-[#3563e9] text-2xl lg:text-3xl font-bold text-center lg:text-left">MORENT</h1>
           <p className="text-gray-500 text-center lg:text-left w-[300px]">

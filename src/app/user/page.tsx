@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { client } from "@/app/lib/sanity";
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface Car {
   _id: string;
@@ -39,7 +40,7 @@ export default function AdminPage() {
     const userEmail = localStorage.getItem('userEmail');
     
     if (!userEmail) {
-      router.push('/'); // Redirect to home if no email is found
+      router.push('/');
       return;
     }
 
@@ -88,7 +89,6 @@ export default function AdminPage() {
         .set({ orders: [] })
         .commit();
       
-      // Refresh the orders
       fetchUserOrders(userOrder.userEmail);
     } catch (err) {
       setError('Failed to clear history');
@@ -122,7 +122,14 @@ export default function AdminPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Your Order History</h1>
+      <div className=' flex flex-col md:flex-row items-center justify-between'>
+      <h1 className="text-3xl font-bold mb-8 text-[#3563e9]">Your Order History</h1>
+      <Link href={'/'}>
+      <button className='bg-[#3563e9] hover:bg-blue-600 text-white px-4 py-2 rounded'>Back To Home</button></Link>
+      
+
+      </div>
+      
       
       <div className="mb-8 bg-white rounded-lg shadow-md p-6">
         <div className="flex justify-between items-center mb-4">
