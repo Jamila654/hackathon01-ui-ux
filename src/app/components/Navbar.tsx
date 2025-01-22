@@ -60,7 +60,7 @@ export default function Navbar() {
         </div>
       </div>
       <div className="icons mt-4 md:mt-0">
-        <Link href={"/admin"}>
+        <Link href={"/user"}>
           <Image src={"/admin.png"} alt="" width={48} height={44} />
         </Link>
       </div>
